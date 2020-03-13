@@ -62,15 +62,24 @@ const char* Strstr(const char* destination,const char* source)
    }
   return NULL;
  }
+ char* Strtok(char* str,const char* sep)//Î´Íê³É
+ {
+  char* cut=str;
+   while (str!=sep) {
+     str++;
+   }
+   *str='\0';
+   return cut;
+ }
 int main(int argc, char const *argv[]) {
   /* code */
   char str1[100]="hello WorldwwwwwwwWORLDWorld!";
   char* str=NULL;
   int lenth=Strlen(str1);
   //printf("%d\n",lenth);
-  const char* p=Strstr(str1,"WORLD");
-
-  printf("%s\n",p);
+  //const char* p=Strstr(str1,"WORLD");
+  char* result=Strtok(str1," ");
+  printf("%s\n",result);
 
 
   return 0;
