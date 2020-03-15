@@ -12,24 +12,24 @@
   }
   return ret;
 }
-void* Memmove(void* destination, const void* source, size_t num) {
-	assert(destination != NULL && source != NULL);
+void* Memmove(void* dest, const void* src, size_t num) {
+	assert(dest != NULL && src != NULL);
 	// 先判定缓冲区内存是否重叠
-	char* cdestination = (char*)destination;
-	char* csource = (char*)source;
-	if (csource< cdestination && cdestination < csource + num) {
+	char* cdest = (char*)dest;
+	char* csrc = (char*)src;
+	if (csrc < cdest && cdest < csrc + num) {
 		// 需要从后往前拷贝
-		char* pdestination = cdestination+ num - 1;  // 最后一个位置的字节
-		char* psource = csource + num - 1;
+		char* pdest = cdest + num - 1;  // 最后一个位置的字节
+		char* psrc = csrc + num - 1;
 		for (size_t i = 0; i < num; i++) {
-			*pdestination= *psource;
-			pdestination--;
-			psource--;
+			*pdest = *psrc;
+			pdest--;
+			psrc--;
 		}
 	} else {
-		Memcpy(destination, source, num);
+		Memcpy(dest, src, num);
 	}
-	return destination;
+	return dest;
 }
 int main(int argc, char const *argv[]) {
   /* code */
