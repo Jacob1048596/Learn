@@ -53,7 +53,7 @@ void BookInit(Addressbook* book)
 }
 void AddressBookClear(Addressbook* book)
 {
-
+  
 }
 void PersonPrint(Addressbook* book)
 {
@@ -68,7 +68,7 @@ void PersonPrint(Addressbook* book)
   PersonInfor* people=&book->people[i];
   for(i=0;i<book->size;i++)
   {
-    printf("[%d]:姓名:[%s]\n性别:[%s]\n年龄:[%d]\n地址:[%s]\n联系方式:[%s]\n",i,people->name,people->sexy,people->age,people->address,people->number);
+    printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",i,people->name,people->sexy,people->age,people->address,people->number);
   }
 printf("共打印[%d]名联系人\n",i);
 }
