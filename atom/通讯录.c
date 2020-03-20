@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-#define MAX_SIZE 100
+#define MAX_SIZE 1000
 typedef struct
 {
   char name[10];
@@ -53,7 +53,7 @@ void BookInit(Addressbook* book)
 }
 void AddressBookClear(Addressbook* book)
 {
-  
+
 }
 void PersonPrint(Addressbook* book)
 {
@@ -74,19 +74,74 @@ printf("共打印[%d]名联系人\n",i);
 }
 void PersonChange(Addressbook* book)
 {
-
+  assert(book);
+    printf("修改联系人信息\n");
+    printf("请输入要修改的联系人编号\n");
+    int id;
+    scanf("%d",&id);
+    PersonInfor* infor=&book->people[id];
+    printf("请输入要修改的联系人姓名\n");
+    char name[10];
+    scanf("%s",&name);
+    strcpy(infor->name,name);
+    printf("请输入要修改的联系人年龄\n");
+    int age;
+    scanf("%d",&age);
+    infor->age=age;
+    printf("请输入要修改的联系人地址\n");
+    char address[20];
+    scanf("%s",&address);
+    strcpy(infor->address,address);
+    printf("请输入要修改的联系人联系方式\n");
+    char number[50];
+    scanf("%s",&number);
+    strcpy(infor->number,number);
+    printf("请输入要修改的联系人性别\n");
+    char sexy[10];
+    scanf("%s",&sexy);
+    strcpy(infor->sexy,sexy);
+    printf("修改后的信息为\n" );
+    printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",
+    id,infor->name,infor->sexy,infor->age,infor->address,infor->number);
 }
 void PersonDelete(Addressbook* book)
 {
-
+  printf("打印联系人\n");
 }
 void PersonFind(Addressbook* book)
 {
+  printf("查找联系人信息\n");
+  printf("1.按照id查询\n2.按照姓名查询\n");
+  int i;
+  scanf("%d",&i);
+  if(i==1)
+  {
+    printf("请输入要的查找联系人编号\n");
+    int id;
+    scanf("%d",&id);
+    PersonInfor* infor=&book->people[id];
+    printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",
+    id,infor->name,infor->sexy,infor->age,infor->address,infor->number);
+  }else
+  {
+    printf("请输入要的查找联系人姓名\n");
+    char name[10];
+    scanf("%s ",&name);
+    for(int i=0;i<book->size;i++)
+    {
+      PersonInfor* infor=&book->people[i];
+      if(strcmp(book->people[i].name,name)==1)
+      {
+        printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",
+        i,infor->name,infor->sexy,infor->age,infor->address,infor->number);
+      }
+    }
+  }
 
 }
 void sort_by_name(Addressbook* book)
 {
-
+  printf("打印联系人\n");
 }
 int menu(void) {
   printf("*********************************\n");
