@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #define MAX_SIZE 1000
+FILE *fp;
 typedef struct
 {
   char name[10];
@@ -11,16 +12,32 @@ typedef struct
   char address[100];
   int  age;
 }PersonInfor;
-typedef struct{
+typedef struct address{
   PersonInfor people[MAX_SIZE];
   int size;
 }Addressbook;
+void file_write(Addressbook* book)     //文件写入
+{
+    FILE * fp;
+    fp=fopen("book","w");
+            if(fp==NULL)
+                return;
+            fwrite(book,sizeof(*book),1,fp);
+            fclose(fp);
+}
+void file_read(Addressbook* book)      //文件读取
+{
+    FILE * fp;
+    fp = fopen("book", "rb");
+    fread(book, sizeof (*book), 1, fp);
+    fclose(fp);
+}
 void PersonAdd(Addressbook* book)
 {
   assert(book);
   PersonInfor* infor=&book->people[book->size];
   printf("新增联系人\n" );
-
+  fp = fopen("book","wb");
   if (book->size>=MAX_SIZE) {
     printf("通讯录已满，新增失败\n");
     return;
@@ -36,11 +53,14 @@ void PersonAdd(Addressbook* book)
   printf("请输入新增联系人年龄: " );
   scanf("%d",&infor->age);
   book->size++;
+  fwrite(book,sizeof(*book),1,fp);
   printf("新增联系人成功\n" );
+  fclose(fp);
   //_sleep(500);
 }
 void BookInit(Addressbook* book)
 {
+
     book->size=0;
     for(int i=0;i<MAX_SIZE;i++)
     {
@@ -50,31 +70,57 @@ void BookInit(Addressbook* book)
       strcpy(book->people[i].sexy," ");
       book->people[i].age=0;
     }
-}
+  }
 void AddressBookClear(Addressbook* book)
 {
-
+  fp = fopen("book","wb");
+  fread(book,sizeof(*book),1,fp);
+  char input[200] = { 0 };
+  printf("即将清空联系人信息，是否继续(Y/N)\n");
+  	scanf("%s", input);
+    if ((strcmp(input,"Y")==0))
+	{
+    BookInit(book);
+    book->size = 0;
+		printf("删除成功！\n");
+    fwrite(book,sizeof(*book),1,fp);
+    printf("修改完成！！\n");
+    fclose(fp);
+		return;
+	}
+	else
+	{
+    fwrite(book,sizeof(*book),1,fp);
+		printf("取消成功！\n");
+    fclose(fp);
+	}
 }
 void PersonPrint(Addressbook* book)
 {
   assert(book);
+  fp = fopen("book","rb");
+  fread(book,sizeof(*book),1,fp);
   if (book->size==0) {
     printf("联系人为空\n");
     return;
   }
   printf("打印联系人\n");
-  PersonInfor* infor=&book->people[book->size];
+  //PersonInfor* infor=&book->people[book->size];
   int i=0;
-  PersonInfor* people=&book->people[i];
-  for(i=0;i<book->size;i++)
-  {
-    printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",i,people->name,people->sexy,people->age,people->address,people->number);
-  }
-printf("共打印[%d]名联系人\n",i);
+    for(i=0;i<book->size;i++)
+    {
+      PersonInfor* people=&book->people[i];
+      printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",i,people->name,people->sexy,people->age,people->address,people->number);
+    }
+    printf("共打印[%d]名联系人\n",i);
+
+  fclose(fp);
 }
 void PersonChange(Addressbook* book)
 {
   assert(book);
+  fp = fopen("book","wb");
+    fread(book,sizeof(*book),1,fp);
     printf("修改联系人信息\n");
     printf("请输入要修改的联系人编号\n");
     int id;
@@ -103,13 +149,32 @@ void PersonChange(Addressbook* book)
     printf("修改后的信息为\n" );
     printf("[%d]:姓名:[%s] 性别:[%s] 年龄:[%d] 地址:[%s] 联系方式:[%s]\n",
     id,infor->name,infor->sexy,infor->age,infor->address,infor->number);
+    fwrite(book,sizeof(*book),1,fp);
+  	printf("修改完成！！\n");
+    fclose(fp);
 }
 void PersonDelete(Addressbook* book)
 {
-  printf("打印联系人\n");
+  fp = fopen("book","wb");
+    fread(book,sizeof(*book),1,fp);
+  PersonInfor* infor=&book->people[book->size];
+	int input = 0;
+	printf("请输入您要删除的联系人序号：\n");
+	scanf("%d", &input);
+	if (input < 0 || input >= book->size)
+	{
+		printf("编号非法！！\n");
+	}
+	book->people[input] = book->people[book->size - 1];
+	book->size--;
+  fwrite(book,sizeof(*book),1,fp);
+	printf("删除完成！！\n");
+  fclose(fp);
 }
 void PersonFind(Addressbook* book)
 {
+  fp = fopen("book","rb");
+  fread(book,sizeof(*book),1,fp);
   printf("查找联系人信息\n");
   printf("1.按照id查询\n2.按照姓名查询\n");
   int i;
@@ -137,11 +202,27 @@ void PersonFind(Addressbook* book)
       }
     }
   }
-
+  fclose(fp);
 }
 void sort_by_name(Addressbook* book)
 {
-  printf("打印联系人\n");
+    PersonInfor* infor=&book->people[book->size];
+    for (int i = book->size-1; i >=0; i--)
+	{
+		for (int j = 1; j <= i; j++)
+		{
+			if (strcmp(book->people[j-1].name, book->people[j].name) > 0)
+			{
+		    PersonInfor t = book->people[j-1];
+				book->people[j-1] = book->people[j];
+				book->people[j] = t;
+			}
+			else
+				continue;
+		}
+	}
+	printf("排序成功！\n");
+	return;
 }
 int menu(void) {
   printf("*********************************\n");
@@ -170,6 +251,7 @@ int menu(void) {
 int main(int argc, char const *argv[])
 {
   Addressbook BookA;
+  //file_read(&BookA);
   BookInit(&BookA);
   typedef void(*Func)(Addressbook*);
   Func Func_Table[]={
@@ -182,6 +264,7 @@ int main(int argc, char const *argv[])
     AddressBookClear,
     sort_by_name,
   };
+
   printf("*请按数字键选择功能模块:\n");
   while (1)
   {
@@ -217,6 +300,7 @@ int main(int argc, char const *argv[])
     //system("cls");
   }
 
+  //file_write(&BookA);
 
 
   return 0;
