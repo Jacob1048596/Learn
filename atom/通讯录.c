@@ -19,7 +19,7 @@ typedef struct address{
 void file_write(Addressbook* book)     //ÎÄ¼þÐ´Èë
 {
     FILE * fp;
-    fp=fopen("book","w");
+    fp=fopen("book","wb");
             if(fp==NULL)
                 return;
             fwrite(book,sizeof(*book),1,fp);
