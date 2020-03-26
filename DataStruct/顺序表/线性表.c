@@ -58,3 +58,8 @@ void Delete(int i,List PtrL)
   PtrL->Last--;
   return;
 }
+int main(int argc, char const *argv[]) {
+  List p=MakeEmpty();
+  Insert(5,3,p);
+  return 0;
+}
