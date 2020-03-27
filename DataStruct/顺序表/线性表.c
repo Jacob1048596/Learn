@@ -7,6 +7,7 @@ struct LNode
 {
   ElementType Data[MAXSIZE];
   int Last;
+  int capycity;
 };
 struct LNode L;
 List PtrL;
