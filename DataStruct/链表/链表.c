@@ -8,7 +8,13 @@ struct LNode
   List Next;
 };
 struct LNode L;
-List PtrL;
+List Init()
+{
+  List p=(List)malloc(sizeof(struct LNode));
+  p->Data=0;
+  p->Next=NULL;
+  return p;
+}
 int Lenth(List PtrL)
 {
   List p =PtrL;
@@ -23,7 +29,7 @@ List Find_id(int k,List PtrL)
 {
   List p=PtrL;
   int i=1;
-  while (p!=NULL&&i<k) {
+  while (p!=NULL&&i<=k) {
     p=p->Next;
     i++;
   }
@@ -61,6 +67,18 @@ List Insert(ElementType X,int i,List PtrL)
     return PtrL;
   }
 }
+void InsertBack(List PtrL,ElementType X)
+{
+  List p=PtrL;
+  while (p->Next) {
+    /* code */
+    p=p->Next;
+  }
+  List s=(List)malloc(sizeof(struct LNode));
+  s->Data=X;
+  p->Next=s;
+  s->Next=NULL;
+}
 List Delete(int i,List PtrL)
 {
   List p,s;
@@ -83,4 +101,29 @@ List Delete(int i,List PtrL)
     free(s);
     return PtrL;
   }
+}
+void PrintList(List PtrL)
+{
+  List p=PtrL->Next;
+  while (p->Next) {
+    /* code */
+    printf("%d ",p->Data);
+    p=p->Next;
+  }
+  printf("\n");
+}
+void test()
+{
+  struct LNode L;
+  List PtrL;
+  InsertBack(PtrL,1);
+  InsertBack(PtrL,2);
+  InsertBack(PtrL,3);
+  InsertBack(PtrL,4);
+  printf("%d\n",Lenth(PtrL));
+  PrintList(PtrL);
+}
+int main(int argc, char const *argv[]) {
+  test();
+  return 0;
 }
