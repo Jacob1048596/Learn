@@ -15,5 +15,6 @@ int main(int argc, char const *argv[]) {
   char* b="hh";
   int p=mystrcmp(a,b);
   printf("%d\n",p);
+  printf(a);
   return 0;
 }
