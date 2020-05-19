@@ -11,14 +11,31 @@ namespace N
    
 }
 using namespace std;
-int add(int a,int b)
+// int add(int a,int b)
+// {
+//     return a+b;
+// }
+// float add(float a,float b)
+// {
+//     return a+b;
+// }
+class test
 {
-    return a+b;
-}
-float add(float a,float b)
-{
-    return a+b;
-}
+private:
+    /* data */
+    int _a;
+public:
+  void SetData(int data)
+  {
+      _a=data;
+  }
+  void PrintData()
+  {
+      cout<<_a<<" "<<endl;
+  }
+    
+};
+
 int main()
 {
     cout<<"C++ language"<<"?"<<endl;
@@ -26,6 +43,11 @@ int main()
     N::print(114514);
     N::print(N::test);
     cout<<N::beast<<endl; 
+    test a;
+    a.SetData(10);
+    a.PrintData();
    //printf("%s",*N::beast);
+   cout<<sizeof(test)<<endl;
+   cout<<"测试"<<endl;
     return 0;
 }
