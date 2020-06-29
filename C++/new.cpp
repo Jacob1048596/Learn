@@ -94,6 +94,7 @@ int main()
         /* code */cout<<*begin<<endl;
         begin++;
     }
+    
        string::reverse_iterator rbegin=s1.rbegin();
         while (rbegin!=s1.rend())
     {
