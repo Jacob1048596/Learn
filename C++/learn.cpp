@@ -67,20 +67,20 @@ public:
     }
 };
 
-Date1::Date(int y=1,int m=1,int d=1)
-{
-    _year=y;
-    _month=m;
-    _date=d;
-}
+// Date1::Date(int y=1,int m=1,int d=1)
+// {
+//     _year=y;
+//     _month=m;
+//     _date=d;
+// }
 // ostream& operator<<(ostream& _cout,const Date& d)
 // {
 //     _cout<<d._year<<" "<<d._month<<" "<<d._date<<endl;
 // }
-Date1::~Date()
-{
-    cout<<"~Date()"<<endl;
-}
+// Date1::~Date()
+// {
+//     cout<<"~Date()"<<endl;
+// }
 
 class Date
 
