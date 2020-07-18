@@ -33,11 +33,75 @@ void test2()
     char* q="abc123";
     while(*p=*q)
     cout<<*p<<*q;
-    print
+    
+}
+void test3()
+{
+    char* ptr ;
+    char str[]="abcdefg";
+    ptr=str;
+    ptr+=5;
+    cout<<*ptr;
+}
+class A
+{
+    public:
+    ~A(){cout<<"~A";}
+};
+class B
+{
+    public:
+    virtual ~B(){cout<<"~B";}
+};
+class C:public A,public B
+{
+     public:
+    ~C(){cout<<"~C";}
+};
+void test4()
+{
+    C* c=new C;
+    B* b1=dynamic_cast<B*>(c);
+    A* a2=dynamic_cast<A*>(b1);
+    delete a2;
+}
+void test5()
+{
+    #include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string a, b;
+    while (cin >> a >> b)
+    {
+        int temp = 0, carry = 0;
+        while (a.size()<b.size())
+            a = "0" + a;
+        while (a.size()>b.size())
+            b = "0" + b;
+        for (int i = a.size() - 1; i >= 0; i--)
+        {
+ 
+            temp = a[i] - '0' + b[i] - '0' + carry;
+            a[i] = temp%10 + '0';
+            if (temp / 10)
+                carry = 1;
+            else
+                carry = 0;
+        }
+        if (carry)
+            a = "1" + a;
+        cout << a << endl;
+    }
+    return 0;
+}
 }
 int main()
 {
     //test1();
-    test2();
+    //test2();
+    //test3();
+    test4();
     
 }
