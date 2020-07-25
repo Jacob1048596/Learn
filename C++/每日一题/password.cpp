@@ -106,7 +106,7 @@ int main()
     if((abc==10)&&(num>0)&&(sign>0))
         tempscore +=3;
     if((abc==20)&&(num>0)&&(sign>0))
-        tempscore +=5;
+        tempscore +=5
     int score=tempscore;
     output(score);
     }
