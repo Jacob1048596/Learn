@@ -1,19 +1,20 @@
+//tasks.json
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "build",  //在launch.json文件中会用到
             "type": "shell",
-            "label": "gcc.exe build active file",
-            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "command": "g++",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "-g", "helloworld.cpp"
             ],
-            "options": {
-                "cwd": "C:\\MinGW\\bin"
+            "group": {
+                "kind": "build",
+                "isDefault": true
             }
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

@@ -2,5 +2,5 @@
 using namespace std;
 int main()
 {
-   cout<<"测试成功"<<endl;
+   cout<<"今日测试成功"<<endl;
 }
