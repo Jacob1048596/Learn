@@ -14,3 +14,6 @@ test
 试一下vscode还能不能用
 ## 7.28
 hahahahahahahahahahahahahaha
+## 11.14
+把windows的代码转移到wsl上，以后用linux编程
+
