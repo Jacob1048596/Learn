@@ -2,6 +2,10 @@
 解题思路：将数组中要删除的元素用后面的元素覆盖掉
 1.原地移除数组中所有的元素val，要求时间复杂度为O(N)，空间复杂度为O(1)
 */
+
+#include<stdio.h>
+#include<stdlib.h>
+
 int removeElement(int* nums, int numsSize, int val){
   int src = 0;
   int dst = 0;
