@@ -7,9 +7,7 @@
 int main(int argc, char const *argv[])
 {
     int fds[2];
-    pipe(fds)
-    /
-
+    pipe(fds);
     if(fork()==0)
     {
         close(fds[0]);
