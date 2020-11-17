@@ -84,8 +84,8 @@ int main()
     printf("创建socket成功\n");
     struct sockaddr_in addr;
     addr.sin_family=AF_INET;
-    addr.sin_port=htons(2580);
-    inet_aton("127.0.0.1",&addr.sin_addr);
+    addr.sin_port=htons(2333);
+    inet_aton("192.168.1.20",&addr.sin_addr);
     //绑定
     int r=bind(lfd,(struct sockaddr*)&addr,sizeof(addr));
     if(r==-1) perror("bind"),exit(1);
