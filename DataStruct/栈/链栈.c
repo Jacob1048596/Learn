@@ -10,7 +10,7 @@ struct SNode {
 typedef PtrToSNode Stack;
 
 Stack CreateStack( )
-{ /* ¹¹½¨Ò»¸ö¶ÑÕ»µÄÍ·½áµã£¬·µ»Ø¸Ã½áµãÖ¸Õë */
+{ /* ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Í·ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½Ø¸Ã½ï¿½ï¿½Ö¸ï¿½ï¿½ */
     Stack S;
 
     S = (Stack)malloc(sizeof(struct SNode));
@@ -19,12 +19,12 @@ Stack CreateStack( )
 }
 
 bool IsEmpty ( Stack S )
-{ /* ÅÐ¶Ï¶ÑÕ»SÊÇ·ñÎª¿Õ£¬ÈôÊÇ·µ»Øtrue£»·ñÔò·µ»Øfalse */
+{ /* ï¿½Ð¶Ï¶ï¿½Õ»Sï¿½Ç·ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½false */
     return ( S->Next == NULL );
 }
 
 bool Push( Stack S, ElementType X )
-{ /* ½«ÔªËØXÑ¹Èë¶ÑÕ»S */
+{ /* ï¿½ï¿½Ôªï¿½ï¿½XÑ¹ï¿½ï¿½ï¿½Õ»S */
     PtrToSNode TmpCell;
 
     TmpCell = (PtrToSNode)malloc(sizeof(struct SNode));
@@ -35,12 +35,12 @@ bool Push( Stack S, ElementType X )
 }
 
 ElementType Pop( Stack S )
-{ /* É¾³ý²¢·µ»Ø¶ÑÕ»SµÄÕ»¶¥ÔªËØ */
+{ /* É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½Õ»Sï¿½ï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½ */
     PtrToSNode FirstCell;
     ElementType TopElem;
 
     if( IsEmpty(S) ) {
-        printf("¶ÑÕ»¿Õ");
+        printf("ï¿½ï¿½Õ»ï¿½ï¿½");
         return ERROR;
     }
     else {

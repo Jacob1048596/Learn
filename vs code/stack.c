@@ -1,5 +1,5 @@
 
-#include "stack.h"
+#include<stack.h>
 #define DEFSTACKSIZE 100
 
 void CheckCapacity(Stack* ps)
