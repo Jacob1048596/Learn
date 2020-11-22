@@ -13,7 +13,7 @@ int main()
     int cfd=socket(AF_INET,SOCK_STREAM,0);
     struct sockaddr_in addr;
     addr.sin_family=AF_INET;
-    addr.sin_port=htonl(2580);
+    addr.sin_port=htons(2580);
     inet_aton("192.168.1.20",&addr.sin_addr);
     int r=connect(cfd,(struct sockaddr*)&addr,sizeof(addr));
      if(r==-1) {perror("connect"),exit(1);}
@@ -41,6 +41,7 @@ int main()
                 printf("sever close\n");
                 break;
             }
+            printf("=>%s\n",buf);
         }
         if(FD_ISSET(key_fd,&rset))
         {
@@ -49,6 +50,7 @@ int main()
             {
                 break;
             }
+            printf("writ:%s\n",buf);
             write(cfd,buf,strlen(buf));
         }
     }

@@ -31,13 +31,17 @@ int tcp_init()
 int main()
 {
     int lfd=tcp_init();
+
     int clients[FD_SETSIZE];
+
     fd_set rset,allset;
     int maxfd,i;
-    for(i=0;i<FD_SETSIZE;i++)
-     clients[i]=-1;
+
+    for(i=0;i<FD_SETSIZE;i++) clients[i]=-1; //client初始化为-1
+
      FD_ZERO(&rset);
      FD_ZERO(&allset);
+     FD_SET(lfd,&allset);
      maxfd=lfd;
      for(;;)
      {
@@ -74,14 +78,17 @@ int main()
              {
                  char buf[1024]={};
                  int r=read(fd,buf,1024);
+
                  if(r<=0)
                  {
-                     close(fd);
-                     clients[i]=-1;
+                    clients[i]=-1;
+                    close(fd);
                     FD_CLR(fd,&allset);
                  }else{
+                     //process();
                      write(fd,buf,r);
                  }
+
              }
              if(--nready<=0) break;
          }
