@@ -40,26 +40,33 @@ int main()
     for(;;)
     {
         int r=epoll_wait(epfd,evs,104,-1);
+        printf("epoll_wait return\n");
+        if(r==-1) continue;
         for(int i=0;i<r;i++)
         {
             int cfd=evs[i].data.fd;
             if(cfd==lfd)
             {
-            
                 int nfd=accept(lfd,NULL,NULL);
-                ev.events=EPOLLIN;
+                ev.events=EPOLLIN|EPOLLET;
                 ev.data.fd=nfd;
                 epoll_ctl(epfd,EPOLL_CTL_ADD,nfd,&ev);//普通节点加入红黑树
             }else{
-                char buf[1024]={};
-                int rd=read(cfd,buf,1024);
-                if(rd<=0)
+                while(1)
                 {
-                    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,NULL);//当对方关闭，从红黑树中删除
-                    close(cfd);
-                }else{
-                    write(cfd,buf,rd);
+                    char buf[1024]={};
+                    int rd=read(cfd,buf,1024);
+                    if(rd==-1&&errno==EAGAIN) break;
+                    if(rd<=0)
+                    {
+                        epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,NULL);//当对方关闭，从红黑树中删除
+                        close(cfd);
+                    }else{
+                        printf("recv=>%s\n",buf);
+                        write(cfd,buf,rd);
+                    }
                 }
+                
 
             }
         }
