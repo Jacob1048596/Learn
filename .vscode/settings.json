@@ -5,6 +5,9 @@
         "string_view": "c",
         "initializer_list": "c",
         "utility": "c",
-        "vector": "c"
+        "vector": "c",
+        "iostream": "cpp",
+        "deque": "cpp",
+        "string": "cpp"
     }
 }
