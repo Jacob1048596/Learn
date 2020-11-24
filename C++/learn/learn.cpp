@@ -43,8 +43,8 @@ private:
     int _month;
     int _date;
 public:
-    Date(int y,int m,int d);
-    ~Date();
+    //Date(int y,int m,int d){};
+    //~Date(){};
     Date1 DateCopy(Date1& d)
     {
         _year=d._year;
@@ -59,7 +59,7 @@ public:
 // {
 //     _cout<<d._year<<" "<<d._month<<" "<<d._date<<endl;
 // }
-    Date operator+(int day)
+    Date1 operator+(int day)
     {
         _date+=day;
 

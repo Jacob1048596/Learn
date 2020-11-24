@@ -8,6 +8,7 @@
         "vector": "c",
         "iostream": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "thread": "cpp"
     }
 }
