@@ -9,6 +9,8 @@
         "iostream": "cpp",
         "deque": "cpp",
         "string": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "cstdlib": "cpp",
+        "*.tcc": "cpp"
     }
 }
