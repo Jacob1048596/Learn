@@ -76,10 +76,10 @@ void test()
     pq.push(6);
     pq.push(20);
     pq.push(4);
-    for(int i=0;i<pq.size();i++)
-    {
-        cout<<pq.val()<<endl;
-    }
+    // for(int i=0;i<pq.size();i++)
+    // {
+    //     cout<<pq.val()<<endl;
+    // }
 }
 int main()
 {
