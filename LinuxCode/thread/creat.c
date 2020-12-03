@@ -26,7 +26,7 @@ void* produce(void* arg)
         num++;
         sleep(rand()%3);
         printf("[%d]生产结束,编号为[%d]\n",id,num);
-        pthread_cond_signal(&cond);     //通知消费者进行消费
+        pthread_cond_signal(&cond);     //通知消费者进行消费//唤醒至少一个
         pthread_mutex_unlock(&mutex);
         sleep(rand()%2);
     }
