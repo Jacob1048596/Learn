@@ -18,7 +18,7 @@ int main()
    int r=connect(fd,(struct sockaddr*)&addr,sizeof(addr));
    if(r<0) {printf("服务器关闭\n");exit(1);}
     printf("连接成功\n");
-    char buf[1024]={};
+    char buf[1024]={};0
    while(fgets(buf,1024,stdin)!=NULL)
    {
        write(fd,buf,strlen(buf));
